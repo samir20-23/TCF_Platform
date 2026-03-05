@@ -90,8 +90,7 @@ const PaymentModal = ({
               selected={selectedProvider === 'paypal'}
               onClick={() => setSelectedProvider('paypal')}
             />
-
-            {/* Ria */}
+{/*  
             <PaymentOption
               id="Ria"
               title="Ria Money Transfer"
@@ -99,9 +98,7 @@ const PaymentModal = ({
               imgSrc="/assets/iconsPayments/ria.png"
               selected={selectedProvider === 'Ria'}
               onClick={() => setSelectedProvider('Ria')}
-            />
-
-            {/* Orange Money */}
+            /> 
             <PaymentOption
               id="Orange Money"
               title="Orange Money"
@@ -110,8 +107,7 @@ const PaymentModal = ({
               selected={selectedProvider === 'Orange Money'}
               onClick={() => setSelectedProvider('Orange Money')}
             />
-
-            {/* Western Union */}
+ 
             <PaymentOption
               id="western"
               title="Western Union"
@@ -119,10 +115,9 @@ const PaymentModal = ({
               imgSrc="/assets/iconsPayments/western.png"
               selected={selectedProvider === 'western'}
               onClick={() => setSelectedProvider('western')}
-            />
+            /> */}
           </div>
-
-          {/* Action Button */}
+ 
           <div className="pt-4">
             <button
               onClick={() => selectedProvider && onConfirm(selectedProvider)}

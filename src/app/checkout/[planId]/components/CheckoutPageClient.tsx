@@ -706,7 +706,7 @@ export default function CheckoutPageClient({ plan }: { plan: Plan }) {
                                         selected={selectedProvider === 'paypal'}
                                         onClick={() => { setSelectedProvider('paypal'); setErrors((p) => ({ ...p, general: undefined })); }}
                                     />
-                                    <PaymentOption
+                                    {/* <PaymentOption
                                         id="Ria"
                                         title="Ria Money Transfer"
                                         subtitle="Paiement en espèces ou virement"
@@ -729,7 +729,7 @@ export default function CheckoutPageClient({ plan }: { plan: Plan }) {
                                         imgSrc="/assets/iconsPayments/western.png"
                                         selected={selectedProvider === 'western'}
                                         onClick={() => { setSelectedProvider('western'); setErrors((p) => ({ ...p, general: undefined })); }}
-                                    />
+                                    /> */}
                                 </div>
                             </div>
 
