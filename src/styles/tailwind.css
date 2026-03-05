@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Source+Sans+3:ital,wght@0,300..900;1,300..900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary — Original Brand Blue */
+    --color-primary: #135ef2;
+    --color-primary-foreground: #ffffff;
+
+    /* Secondary — Dark Academic Blue */
+    --color-secondary: #2c5282;
+    --color-secondary-foreground: #ffffff;
+
+    /* Accent — Gold/Tan for subtle highlights */
+    --color-accent: #c4a574;
+    --color-accent-foreground: #ffffff;
+
+    /* Background surfaces */
+    --color-background: #f8fafc;
+    --color-foreground: #0f172a;
+
+    /* Cards */
+    --color-card: #ffffff;
+    --color-card-foreground: #334155;
+
+    /* Popovers */
+    --color-popover: #ffffff;
+    --color-popover-foreground: #334155;
+
+    /* Muted / subtle */
+    --color-muted: #f1f5f9;
+    --color-muted-foreground: #64748b;
+
+    /* Destructive */
+    --color-destructive: #ef4444;
+    --color-destructive-foreground: #ffffff;
+
+    /* Status */
+    --color-success: #16a34a;
+    --color-success-foreground: #ffffff;
+    --color-warning: #f59e0b;
+    --color-warning-foreground: #1c1917;
+    --color-error: #ef4444;
+    --color-error-foreground: #ffffff;
+
+    /* Borders, inputs, focus rings */
+    --color-border: #e2e8f0;
+    --color-input: #e2e8f0;
+    --color-ring: #135ef2;
+  }
+
+  .dark {
+    --color-primary: #3b82f6;
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #60a5fa;
+    --color-secondary-foreground: #ffffff;
+    --color-accent: #d4b886;
+    --color-accent-foreground: #0c0a1a;
+    --color-background: #0f172a;
+    --color-foreground: #f8fafc;
+    --color-card: #1e293b;
+    --color-card-foreground: #f1f5f9;
+    --color-popover: #1e293b;
+    --color-popover-foreground: #f1f5f9;
+    --color-muted: #334155;
+    --color-muted-foreground: #94a3b8;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-input: #334155;
+    --color-ring: #3b82f6;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-heading {
+    font-family: 'Crimson Text', Georgia, serif;
+  }
+
+  .font-caption {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  /* Focus visible — accessible focus ring */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+
+  /* Selection color */
+  ::selection {
+    background: rgba(19, 94, 242, 0.15);
+    color: #0f172a;
+  }
+}
+
+/* ─── Component layer ─── */
+@layer components {
+
+  /* Very subtle glass header, as requested */
+  .glass-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .dark .glass-header {
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Buttons - Clean, slight lift, no bouncy effects */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200;
+  }
+
+  .btn-primary:hover {
+    @apply shadow -translate-y-[1px];
+    background: #1150cc;
+  }
+
+  .btn-primary:active {
+    @apply translate-y-0 shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-sm transition-all duration-200;
+  }
+
+  .btn-secondary:hover {
+    @apply shadow -translate-y-[1px];
+    background: #1e3a5f;
+  }
+
+  .btn-secondary:active {
+    @apply translate-y-0 shadow-sm;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-input bg-card px-5 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-200;
+  }
+
+  .btn-outline:hover {
+    @apply bg-muted text-foreground;
+  }
+
+  .btn-outline:active {
+    @apply bg-muted;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-transparent px-4 py-2 text-sm font-medium text-foreground transition-all duration-200;
+  }
+
+  .btn-ghost:hover {
+    @apply bg-muted;
+  }
+
+  /* Cards - Structural layout, soft corners, light shadow */
+  .card {
+    @apply rounded-xl border border-border bg-card p-6 shadow-sm transition-shadow duration-200;
+  }
+
+  .card:hover {
+    @apply shadow;
+  }
+
+  .card-interactive {
+    @apply card cursor-pointer hover:border-primary/30;
+  }
+
+  /* Sections */
+  .section-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .section-heading {
+    @apply text-center mb-12 sm:mb-16;
+  }
+
+  .section-heading h2 {
+    @apply text-3xl sm:text-4xl font-bold text-foreground mb-4 font-heading;
+  }
+
+  .section-heading p {
+    @apply text-lg text-muted-foreground max-w-2xl mx-auto;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold;
+  }
+
+  .badge-primary {
+    @apply badge bg-[#eff4ff] text-[#135ef2];
+    /* Adjusted to match primary blue */
+  }
+
+  .badge-success {
+    @apply badge bg-success-50 text-success-700;
+  }
+
+  .badge-warning {
+    @apply badge bg-warning-50 text-warning-600;
+  }
+
+  .badge-error {
+    @apply badge bg-error-50 text-error-600;
+  }
+
+  .badge-muted {
+    @apply badge bg-muted text-muted-foreground border border-border;
+  }
+
+  /* Inputs */
+  .input-field {
+    @apply w-full rounded-md border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-shadow duration-200;
+  }
+
+  .input-field:focus {
+    @apply border-primary outline-none;
+    box-shadow: 0 0 0 3px rgba(19, 94, 242, 0.1);
+  }
+
+  .input-field:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  .nav-link-animated {
+    @apply relative text-sm font-medium text-foreground transition-colors duration-200;
+  }
+
+  .nav-link-animated:hover,
+  .nav-link-animated.active {
+    @apply text-primary;
+  }
+
+  .skeleton {
+    @apply bg-muted rounded-md animate-pulse;
+  }
+
+  /* Solid and clean backgrounds for sections */
+  .bg-academic-light {
+    @apply bg-[#f8fafc];
+  }
+
+  .bg-academic-card {
+    @apply bg-white;
+  }
+}
+
+@layer utilities {
+  .text-data {
+    font-family: 'JetBrains Mono', monospace;
+    font-feature-settings: 'tnum' on, 'lnum' on;
+  }
+
+  /* Simple fade-in utility (opacity handled inside) */
+  .fade-in-up {
+    animation: fade-in-up 0.4s ease-out forwards;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 1.5rem;
+    width: 200%;
+    animation: marquee 35s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .fade-in-up,
+    .marquee-track {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}

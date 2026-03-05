@@ -1,0 +1,187 @@
+@startuml
+title TCF Canada Prep - Full Database ER (conception)
+
+' -------------------------------
+' TABLES
+' -------------------------------
+entity Users {
+  * id : uuid <<PK>>
+  --
+  email : varchar <<UNIQUE>>
+  name : varchar
+  role : varchar   ' student | admin
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity Plans {
+  * id : uuid <<PK>>
+  --
+  name : varchar
+  price_cents : int
+  duration_days : int
+  description : text
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity Tests {
+  * id : uuid <<PK>>
+  --
+  name : varchar
+  test_type : varchar   ' reading | listening | writing | speaking
+  duration_minutes : int
+  description : text
+  published : boolean
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity PlanTests {
+  * id : uuid <<PK>>
+  --
+  plan_id : uuid <<FK>>
+  test_id : uuid <<FK>>
+  max_attempts : int
+  manual_correction : boolean
+  created_at : timestamptz
+}
+
+entity Subscriptions {
+  * id : uuid <<PK>>
+  --
+  user_id : uuid <<FK>>
+  plan_id : uuid <<FK>>
+  start_at : timestamptz
+  end_at : timestamptz
+  status : varchar   ' active | expired | canceled
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity SubTestAccess {
+  * id : uuid <<PK>>
+  --
+  subscription_id : uuid <<FK>>
+  plan_test_id : uuid <<FK>>
+  remaining_attempts : int
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity Questions {
+  * id : uuid <<PK>>
+  --
+  test_id : uuid <<FK>>
+  position : int
+  text : text
+  q_type : varchar   ' mcq | writing | speaking
+  points : int
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity Options {
+  * id : uuid <<PK>>
+  --
+  question_id : uuid <<FK>>
+  text : text
+  is_correct : boolean
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity Attempts {
+  * id : uuid <<PK>>
+  --
+  user_id : uuid <<FK>>
+  test_id : uuid <<FK>>
+  subscription_id : uuid <<FK>>
+  started_at : timestamptz
+  finished_at : timestamptz nullable
+  score : numeric nullable
+  status : varchar   ' in_progress | finished | pending_review
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity Answers {
+  * id : uuid <<PK>>
+  --
+  attempt_id : uuid <<FK>>
+  question_id : uuid <<FK>>
+  option_id : uuid nullable
+  text_answer : text nullable
+  media_url : text nullable
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity Resources {
+  * id : uuid <<PK>>
+  --
+  test_id : uuid <<FK>> nullable
+  title : varchar
+  resource_type : varchar   ' audio | video | doc | article
+  url : text
+  description : text
+  published : boolean
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+
+entity Payments {
+  * id : uuid <<PK>>
+  --
+  subscription_id : uuid <<FK>> nullable
+  user_id : uuid <<FK>>
+  provider : varchar   ' stripe | paypal
+  provider_payment_id : varchar
+  amount_cents : int
+  currency : varchar
+  status : varchar   ' paid | failed | pending
+  created_at : timestamptz
+}
+
+entity Actions {
+  * id : uuid <<PK>>
+  --
+  actor_type : varchar   ' user | admin | system
+  actor_id : uuid nullable
+  action_type : varchar
+  target_type : varchar
+  target_id : uuid nullable
+  details : text
+  ip : varchar nullable
+  user_agent : text nullable
+  created_at : timestamptz
+}
+
+' -------------------------------
+' RELATIONSHIPS (cardinalities)
+' -------------------------------
+Users "1" -- "0..*" Subscriptions : has
+Plans "1" -- "0..*" PlanTests : defines
+Tests "1" -- "0..*" PlanTests : included_in
+
+PlanTests "1" -- "0..*" SubTestAccess : template_copied_to
+Subscriptions "1" -- "0..*" SubTestAccess : provides
+
+Tests "1" -- "0..*" Questions : contains
+Questions "1" -- "0..*" Options : has
+
+Users "1" -- "0..*" Attempts : takes
+Tests "1" -- "0..*" Attempts : attempted_in
+Subscriptions "1" -- "0..*" Attempts : used_for
+
+Attempts "1" -- "0..*" Answers : records
+Questions "1" -- "0..*" Answers : answered_by
+
+Tests "1" -- "0..*" Resources : may_have
+
+Users "1" -- "0..*" Payments : pays
+Subscriptions "1" -- "0..*" Payments : pays_for
+
+Users "0..*" -- "0..*" Actions : performs_or_related
+
+@enduml

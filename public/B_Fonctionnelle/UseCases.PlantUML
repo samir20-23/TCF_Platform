@@ -1,0 +1,62 @@
+@startuml
+title TCF Canada Prep - Use Case Diagram
+
+left to right direction
+
+actor Visitor
+actor Student
+actor Admin
+actor PaymentGateway as "Payment Gateway"
+
+usecase "View Landing / Plans" as UC1
+usecase "Register / Login" as UC2
+usecase "Subscribe to Plan / Checkout" as UC3
+usecase "Receive Payment & Create Subscription" as UC4
+usecase "View Dashboard" as UC5
+usecase "View Available Tests" as UC6
+usecase "Start Test" as UC7
+usecase "Autosave Answers" as UC8
+usecase "Record Speaking / Upload" as UC9
+usecase "Submit / Finish Test" as UC10
+usecase "Auto-grade MCQ" as UC11
+usecase "Request Manual Review (writing/speaking)" as UC12
+usecase "View Results & History" as UC13
+usecase "Admin: Create/Edit Plans" as UC14
+usecase "Admin: Create/Edit Tests & Questions" as UC15
+usecase "Admin: Review & Grade Attempts" as UC16
+usecase "Admin: Manage Users & Subscriptions" as UC17
+usecase "View Audit Actions" as UC18
+
+Visitor --> UC1
+Visitor --> UC2
+Visitor --> UC3
+
+PaymentGateway --> UC4
+UC3 --> PaymentGateway : initiate
+UC4 --> UC3 : webhook/confirm
+
+Student --> UC2
+Student --> UC1
+Student --> UC5
+Student --> UC6
+Student --> UC7
+Student --> UC8
+Student --> UC9
+Student --> UC10
+Student --> UC13
+
+UC10 --> UC11
+UC10 --> UC12
+
+Admin --> UC14
+Admin --> UC15
+Admin --> UC16
+Admin --> UC17
+Admin --> UC18
+
+' relations between usecases
+UC3 .> UC4 : includes
+UC7 .> UC8 : includes
+UC10 .> UC8 : includes
+
+@enduml
