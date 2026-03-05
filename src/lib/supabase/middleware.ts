@@ -51,6 +51,7 @@ export async function updateSession(request: NextRequest) {
     '/terms-of-service',
     '/user-login',
     '/user-registration',
+    '/checkout',
     '/auth/callback',
     '/not-authorized',
   ];

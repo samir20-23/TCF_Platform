@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import PublicHeader from '@/components/common/PublicHeader';
 import CheckoutPageClient from './components/CheckoutPageClient';
+import { createClient } from '@/lib/supabase/server';
 
 interface Props {
   params: Promise<{ planId: string }>;
@@ -9,13 +10,18 @@ interface Props {
 
 async function getPlan(planId: string) {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/plans`, { cache: 'no-store' });
-    if (!res.ok) return null;
-    const data = await res.json();
-    const plans: any[] = data.plans || [];
-    return plans.find((p) => p.id === planId) || null;
-  } catch {
+    const supabase = await createClient();
+    const { data: plan, error } = await supabase
+      .from('plans')
+      .select('*')
+      .eq('id', planId)
+      .eq('active', true)
+      .single();
+
+    if (error || !plan) return null;
+    return plan;
+  } catch (error) {
+    console.error('Error fetching plan:', error);
     return null;
   }
 }

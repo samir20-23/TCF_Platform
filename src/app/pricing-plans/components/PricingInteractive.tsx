@@ -9,7 +9,7 @@ import TrustSignals from './TrustSignals';
 import TestimonialCard from './TestimonialCard';
 import FAQSection from './FAQSection';
 import PaymentModal from './PaymentModal';
-import SuccessModal from './SuccessModal'; 
+import SuccessModal from './SuccessModal';
 import toast from 'react-hot-toast';
 import PlanCards from './planCards';
 
@@ -209,13 +209,13 @@ const PricingInteractive = () => {
   const handleSelectPlan = (planName: string, price: number) => {
     if (!isHydrated) return;
 
-    if (!user) {
-      window.location.href = `/user-registration`;
-      return;
-    }
-
     const plan = plans.find(p => p.planName === planName);
     if (!plan) return;
+
+    if (!user) {
+      window.location.href = `/checkout/${plan.id}`;
+      return;
+    }
 
     setSelectedPlanId(plan.id);
     setSelectedPlanName(planName);
