@@ -81,8 +81,8 @@ const PublicHeader = () => {
           <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 transition-opacity duration-200 hover:opacity-80" aria-label="TCF Canada — Accueil">
-              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold text-sm shadow-sm">
-                TCF
+              <div className="flex h-8 w-8 items-center justify-center rounded-md  text-primary-foreground font-bold text-sm shadow-sm">
+               <img src="/logo2.png" alt="TCF Canada" />
               </div>
               <span className="text-xl font-bold text-foreground hidden sm:block font-heading">
                 TCF <span className="text-primary">Canada</span>

@@ -33,15 +33,15 @@ export default function SiteFooter() {
                 <div className="grid grid-cols-1 gap-10 py-12 sm:py-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
 
                     {/* Brand column */}
-                    <div className="sm:col-span-2 lg:col-span-1"> 
+                    <div className="sm:col-span-2 lg:col-span-1">
                         <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
-                            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-white font-bold text-sm">
-                                TCF
+                            <div className="flex h-9 w-9 items-center justify-center rounded-lg text-white font-bold text-sm">
+                                <img src="/logo2.png" alt="TCF Canada" />
                             </div>
                             <span className="text-lg font-bold">
                                 TCF <span className="text-primary-300">Canada</span>
-                            </span> 
-                        </Link> 
+                            </span>
+                        </Link>
                         <p className="text-sm text-white/60 leading-relaxed max-w-xs mb-6">
                             Plateforme de préparation au TCF Canada. Simulations chronométrées, corrections professionnelles et suivi personnalisé.
                         </p>
