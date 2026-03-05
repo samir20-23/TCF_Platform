@@ -8,7 +8,7 @@ import PaymentModal from './PaymentModal';
 import SuccessModal from './SuccessModal';
 import toast from 'react-hot-toast';
 
-interface PricingPlan { 
+interface PricingPlan {
   id: string;
   planName: string;
   price: number;
@@ -105,7 +105,7 @@ const PlanCards = () => {
 
     // Non-digital providers: show contact message
     if (provider !== 'stripe' && provider !== 'paypal') {
-      toast.success(`Veuillez nous contacter à support@tcfcanadaprep.com pour finaliser votre paiement via ${provider}.`, { duration: 8000 });
+      toast.success(`Veuillez nous contacter à support@tcfcanada....com pour finaliser votre paiement via ${provider}.`, { duration: 8000 });
       setIsPaymentModalOpen(false);
       return;
     }

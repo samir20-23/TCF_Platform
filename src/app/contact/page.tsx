@@ -116,8 +116,8 @@ export default function ContactPage() {
                   <Icon name="EnvelopeIcon" size={24} className="mt-1 text-primary" />
                   <div>
                     <h3 className="font-semibold text-foreground">Email</h3>
-                    <a href="mailto:support@tcfcanadaprep.com" className="text-muted-foreground hover:text-primary">
-                      support@tcfcanadaprep.com
+                    <a href="mailto:support@tcfcanada....com" className="text-muted-foreground hover:text-primary">
+                      support@tcfcanada....com
                     </a>
                   </div>
                 </div>
@@ -126,7 +126,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-foreground">Téléphone</h3>
                     <a href="tel:+15141234567" className="text-muted-foreground hover:text-primary">
-                      +1 (514) 123-4567
+                      +1 (514....-4567
                     </a>
                   </div>
                 </div>
@@ -204,11 +204,10 @@ export default function ContactPage() {
 
                 {submitStatus && (
                   <div
-                    className={`rounded-md p-4 ${
-                      submitStatus.type === 'success'
-                        ? 'bg-success/10 text-success'
-                        : 'bg-destructive/10 text-destructive'
-                    }`}
+                    className={`rounded-md p-4 ${submitStatus.type === 'success'
+                      ? 'bg-success/10 text-success'
+                      : 'bg-destructive/10 text-destructive'
+                      }`}
                   >
                     {submitStatus.message}
                   </div>

@@ -62,16 +62,16 @@ export default function UserRegistrationPage() {
           </p>
           <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
             <a
-              href="mailto:support@tcfcanadaprep.com"
+              href="mailto:support@tcfcanada....com"
               className="inline-flex items-center space-x-2 rounded-md bg-muted px-6 py-3 font-caption text-sm font-medium text-foreground transition-academic hover:-translate-y-0.5 hover:shadow-academic-sm"
             >
-              <span>support@tcfcanadaprep.com</span>
+              <span>support@tcfcanada....com</span>
             </a>
             <a
               href="tel:+15141234567"
               className="inline-flex items-center space-x-2 rounded-md bg-muted px-6 py-3 font-caption text-sm font-medium text-foreground transition-academic hover:-translate-y-0.5 hover:shadow-academic-sm"
             >
-              <span>+1 (514) 123-4567</span>
+              <span>+1 (514....-4567</span>
             </a>
           </div>
         </div>

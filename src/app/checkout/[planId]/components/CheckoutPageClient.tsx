@@ -384,7 +384,7 @@ export default function CheckoutPageClient({ plan }: { plan: Plan }) {
                 else throw new Error('URL PayPal manquante');
             } else {
                 toast.success(
-                    `Veuillez nous contacter à support@tcfcanadaprep.com pour finaliser votre paiement via ${selectedProvider}.`,
+                    `Veuillez nous contacter à support@tcfcanada....com pour finaliser votre paiement via ${selectedProvider}.`,
                     { duration: 8000 }
                 );
             }
