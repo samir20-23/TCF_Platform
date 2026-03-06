@@ -43,6 +43,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const supabase = useMemo(() => createClient(), []);
 
+  // If Supabase is not configured, set ready immediately
+  useEffect(() => {
+    if (!supabase) {
+      setReady(true);
+      setLoading(false);
+    }
+  }, [supabase]);
+
   const fetchProfile = useCallback(async (userId: string, signal?: AbortSignal): Promise<UserProfile | null> => {
     try {
       setProfileError(null);
@@ -107,6 +115,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const setupAuth = async () => {
       setLoading(true);
+      
+      // If Supabase is not configured, skip auth setup
+      if (!supabase) {
+        setLoading(false);
+        setReady(true);
+        return;
+      }
+
       try {
         // 1. Get initial session
         const { data: { session: initialSession } } = await supabase.auth.getSession();
@@ -187,6 +203,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [user, supabase]);
 
   const signIn = useCallback(async (email: string, password: string) => {
+    if (!supabase) {
+      throw new Error('Authentication is not configured');
+    }
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
 
@@ -210,6 +229,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [supabase, fetchProfile, router]);
 
   const signUp = useCallback(async (email: string, password: string, name: string, options: SignUpOptions = { shouldRedirect: true }) => {
+    if (!supabase) {
+      return { data: null, error: new Error('Authentication is not configured') };
+    }
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -256,7 +278,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = useCallback(async () => {
     try {
-      await supabase.auth.signOut();
+      if (supabase) {
+        await supabase.auth.signOut();
+      }
 
       setUser(null);
       setProfile(null);
@@ -298,6 +322,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const resendVerification = useCallback(async (email: string) => {
+    if (!supabase) {
+      return { error: new Error('Authentication is not configured') };
+    }
     const { error } = await supabase.auth.resend({
       type: 'signup',
       email,
