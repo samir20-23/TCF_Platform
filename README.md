@@ -481,3 +481,256 @@ For issues and questions:
   <div align="center">
     <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=50&duration=4&pause=20&color=d4002e&center=true&vCenter=true&width=482&lines=........" alt="l" /> 
 </div>
+<!-- database  -->
+
+
+# SUPABASE DOCUMENTATION FOR DEVELOPERS
+
+This project uses Supabase as the backend infrastructure.  
+Supabase provides the PostgreSQL database, authentication system, and storage.
+
+A developer working on this project must understand three main parts:
+
+1. Database structure
+2. Storage buckets
+3. Environment variables and project connection
+
+
+--------------------------------------------------
+SUPABASE PROJECT ACCESS
+--------------------------------------------------
+
+To access the Supabase project:
+
+1. Go to Supabase Dashboard
+2. Select the project used by this application
+3. Navigate to:
+
+Project Settings → API
+
+From here you will obtain:
+
+Project URL  
+Anon Public Key  
+Service Role Key
+
+
+These are required in the environment configuration file.
+
+Example:
+
+NEXT_PUBLIC_SUPABASE_URL = Project URL  
+NEXT_PUBLIC_SUPABASE_ANON_KEY = Anon Public Key  
+SUPABASE_SERVICE_ROLE_KEY = Service Role Key
+
+
+Important:
+
+The service role key must never be exposed in the frontend because it has full database access.
+
+
+
+--------------------------------------------------
+DATABASE STRUCTURE
+--------------------------------------------------
+
+The platform uses PostgreSQL provided by Supabase.
+
+The database contains the core logic for the TCF Canada test platform.
+
+Typical entities include:
+
+Users  
+Profiles  
+Plans / Subscriptions  
+Tests  
+Questions  
+Resources  
+Submissions  
+Admin audit logs
+
+
+Purpose of the main tables:
+
+users  
+Stores authentication users handled by Supabase Auth.
+
+profiles  
+Contains user role information and platform metadata.
+
+plans  
+Defines subscription plans available for students.
+
+subscriptions  
+Tracks which user has which plan and expiration.
+
+tests  
+Represents a practice test.
+
+questions  
+Stores test questions and their types.
+
+resources  
+Stores media used by tests such as audio or reading texts.
+
+submissions  
+Stores student answers and results.
+
+admin_audit_logs  
+Tracks admin actions for moderation and security.
+
+
+
+--------------------------------------------------
+DATABASE MIGRATIONS
+--------------------------------------------------
+
+Schema changes must be tracked through SQL migrations.
+
+Developers can create migrations using Supabase CLI.
+
+Install CLI:
+
+npm install -g supabase
+
+
+Login:
+
+supabase login
+
+
+Link the project:
+
+supabase link --project-ref YOUR_PROJECT_ID
+
+
+Create migration:
+
+supabase migration new migration_name
+
+
+Push migration to database:
+
+supabase db push
+
+
+This ensures all developers share the same schema.
+
+
+--------------------------------------------------
+SUPABASE STORAGE
+--------------------------------------------------
+
+Supabase Storage is used for test resources.
+
+Typical files include:
+
+Audio files for listening tests  
+PDF reading documents  
+Student file uploads
+
+
+Storage is organized in buckets.
+
+Example buckets:
+
+audio-resources  
+test-documents  
+student-uploads
+
+
+Each bucket has access policies configured in Supabase.
+
+
+--------------------------------------------------
+HOW FILES ARE USED
+--------------------------------------------------
+
+Admin uploads files when creating resources.
+
+Example:
+
+Audio prompt for listening question  
+PDF reading document  
+Student writing file upload
+
+
+Files are stored in Supabase Storage and linked to the resource metadata stored in the database.
+
+
+
+--------------------------------------------------
+AUTHENTICATION SYSTEM
+--------------------------------------------------
+
+Authentication is handled by Supabase Auth.
+
+Users sign in using email and password.
+
+After login:
+
+A profile record determines the role.
+
+Roles include:
+
+admin  
+student
+
+
+Role controls access to dashboards and platform features.
+
+
+
+--------------------------------------------------
+DEVELOPMENT WORKFLOW
+--------------------------------------------------
+
+Typical workflow for a developer:
+
+1. Pull project repository
+2. Configure environment variables
+3. Link Supabase project
+4. Run database migrations
+5. Start development server
+
+
+Example commands:
+
+git clone project_repo  
+cd project  
+
+npm install  
+
+supabase link --project-ref PROJECT_ID  
+
+supabase db push  
+
+npm run dev
+
+
+
+--------------------------------------------------
+IMPORTANT RULES
+--------------------------------------------------
+
+Never commit environment keys to Git.
+
+Never expose the service role key.
+
+Always use migrations when modifying database structure.
+
+Always document new tables or storage buckets.
+
+
+--------------------------------------------------
+SUMMARY
+--------------------------------------------------
+
+Supabase is responsible for:
+
+Database (PostgreSQL)  
+Authentication (user login)  
+Storage (files for tests)  
+API access for the application
+
+All backend data and logic rely on this infrastructure.
