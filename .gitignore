@@ -3,6 +3,8 @@
 .env.local
 .env.local.*
 .env.development.local
+env
+env.txt
 
 # Node modules
 node_modules/
