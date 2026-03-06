@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
+import { useState } from 'react';
 
 interface HeroSectionProps {
   title: string;
@@ -11,168 +12,147 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ title, subtitle, ctaText, ctaLink }: HeroSectionProps) => {
-  // Brand colors: Gold, Blue, and a touch of Red
-  const balls = [
-    { color: '#135df2ff', i: '20px', d: '6s' },
-    { color: '#c4a57492', i: '40px', d: '10s' },
-    { color: '#dc143c87', i: '10px', d: '8s' }, // The "little" red
-    { color: '#135df276', i: '60px', d: '14s' },
-    { color: '#c4a574c8', i: '30px', d: '11s' },
-  ];
+  const [email, setEmail] = useState('');
 
   return (
-    <section className="relative overflow-hidden bg-academic-light min-h-[85vh] flex items-center">
+    <section className="relative overflow-hidden bg-[#f4f7f9] py-16 sm:py-24 lg:py-32">
+      <div className="section-container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          
+          {/* Left Column — Text */}
+          <div className="flex flex-col justify-center">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur-md border border-[#e5e7eb] px-4 py-1.5 text-sm font-medium text-foreground mb-6 w-fit">
+              <Icon name="AcademicCapIcon" size={16} className="text-[#135ef2]" />
+              <span>La plateforme #1 de préparation au TCF Canada</span>
+            </div>
 
-      {/* --- ANIMATED BACKGROUND CLUSTERS --- */}
-      <div className="absolute inset-0 pointer-events-none">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
+              Maîtrisez votre <span className="text-[#135ef2]">examen TCF</span>
+            </h1>
 
-        {/* Top Left Cluster */}
-        <div className="absolute -top-20 -left-20   scale-125 sm:scale-150" style={{ opacity: "0.1" }}>
-          <div className="container-loader">
-            {balls.map((ball, idx) => (
-              <div
-                key={`tl-${idx}`}
-                className="ball"
-                style={{
-                  // @ts-ignore
-                  '--color': ball.color,
-                  '--i': ball.i,
-                  '--d': ball.d,
-                } as React.CSSProperties}
-              />
-            ))}
-          </div>
-        </div>
+            <p className="text-lg sm:text-xl text-[#64748b] leading-relaxed mb-10 max-w-md">
+              {subtitle}
+            </p>
 
-        {/* Bottom Right Cluster */}
-        <div className="absolute -bottom-20 -right-20  scale-125 sm:scale-150" style={{ opacity: "0.1" }}>
-          <div className="container-loader">
-            {balls.map((ball, idx) => (
-              <div
-                key={`br-${idx}`}
-                className="ball"
-                style={{
-                  // @ts-ignore
-                  '--color': ball.color,
-                  '--i': ball.i,
-                  '--d': ball.d,
-                } as React.CSSProperties}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+            {/* Email CTA Input with Button */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-8">
+              <div className="flex-1 flex gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Votre adresse email"
+                  className="flex-1 rounded-lg border border-[#e5e7eb] bg-white px-5 py-3 text-foreground placeholder:text-[#64748b] focus:border-[#135ef2] focus:outline-none focus:ring-2 focus:ring-[#135ef2]/20 transition-all"
+                />
+                <Link
+                  href={ctaLink}
+                  className="rounded-lg bg-[#135ef2] text-white px-6 py-3 font-semibold hover:bg-[#1150cc] transition-all whitespace-nowrap shadow-sm hover:shadow-md"
+                >
+                  {ctaText}
+                </Link>
+              </div>
+            </div>
 
-      {/* Subtle Grid overlay for that premium academic feel */}
-      <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage: 'radial-gradient(circle, #0f172a 1px, transparent 1px)',
-          backgroundSize: '24px 24px',
-        }}
-      />
-
-      {/* --- CONTENT --- */}
-      <div className="relative z-10 section-container w-full py-16 sm:py-20 lg:py-28">
-        <div className="mx-auto max-w-3xl text-center">
-
-          {/* Tag line */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur-md border border-border px-4 py-1.5 text-sm font-medium text-foreground mb-8 shadow-sm">
-            <Icon name="AcademicCapIcon" size={16} className="text-[#135ef2]" />
-            <span>La plateforme #1 de préparation au TCF Canada</span>
-          </div>
-
-          {/* Main heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6 font-heading">
-            {title.split(' ').map((word, i) => (
-              <span key={i}>
-                {i === title.split(' ').length - 1 ? (
-                  <span className="text-[#135ef2]">{word}</span>
-                ) : (
-                  word + ' '
-                )}
-              </span>
-            ))}
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
-            {subtitle}
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href={ctaLink}
-              className="bg-[#135ef2] text-white hover:shadow-blue-500/40 transition-all text-base px-8 py-3.5 w-full sm:w-auto rounded-lg font-semibold shadow-lg shadow-blue-500/20"
-            >
-              {ctaText}
-            </Link>
-            <Link
-              href="/pricing-plans"
-              className="bg-white/60 backdrop-blur-md border border-border/50 hover:bg-white text-base px-8 py-3.5 w-full sm:w-auto rounded-lg font-semibold transition-all"
-            >
-              Voir les plans
+            {/* Secondary CTA */}
+            <Link href="/pricing-plans" className="text-[#135ef2] font-semibold hover:underline text-sm">
+              Voir nos plans de tarification →
             </Link>
           </div>
 
-          {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-12 pt-8 border-t border-border/40">
-            <TrustItem icon="UsersIcon" value="500+" label="Étudiants" />
-            <TrustItem icon="StarIcon" value="4.8/5" label="Satisfaction" />
-            <TrustItem icon="ShieldCheckIcon" value="100%" label="Sécurisé" />
-            <TrustItem icon="ClockIcon" value="24/7" label="Accessibilité" />
+          {/* Right Column — Dashboard Mockup */}
+          <div className="relative hidden lg:flex items-center justify-center">
+            <div className="w-full max-w-md">
+              {/* Outer card container with shadow */}
+              <div className="rounded-2xl border border-[#e5e7eb] bg-white shadow-lg overflow-hidden">
+                
+                {/* Card header */}
+                <div className="bg-gradient-to-r from-[#135ef2] to-[#1150cc] px-6 py-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-white font-semibold text-sm">Mon tableau de bord</span>
+                    <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-white/30"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-white/30"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-white/30"></div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card content */}
+                <div className="p-6 space-y-6">
+                  
+                  {/* Score section */}
+                  <div className="text-center">
+                    <p className="text-sm text-[#64748b] mb-2">Mon score</p>
+                    <p className="text-4xl font-bold text-[#0f172a]">520<span className="text-lg text-[#64748b]">/699</span></p>
+                  </div>
+
+                  {/* Progress ring */}
+                  <div className="flex justify-center items-center relative h-32 w-32 mx-auto">
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                      <circle cx="50" cy="50" r="45" fill="none" stroke="#f1f5f9" strokeWidth="3" />
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        fill="none"
+                        stroke="#135ef2"
+                        strokeWidth="3"
+                        strokeDasharray={`${45 * 2 * Math.PI * 0.74} ${45 * 2 * Math.PI}`}
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-[#0f172a]">74%</p>
+                        <p className="text-xs text-[#64748b]">réussite</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stats grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="rounded-lg bg-[#f4f7f9] p-3 text-center">
+                      <p className="text-xs text-[#64748b] mb-1">Tests complétés</p>
+                      <p className="text-2xl font-bold text-[#0f172a]">8</p>
+                    </div>
+                    <div className="rounded-lg bg-[#f4f7f9] p-3 text-center">
+                      <p className="text-xs text-[#64748b] mb-1">Jours de suite</p>
+                      <p className="text-2xl font-bold text-[#0f172a]">5</p>
+                    </div>
+                  </div>
+
+                  {/* Mini notification cards */}
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2 p-2 rounded-lg bg-[#eff4ff] border border-[#dbeafe]">
+                      <Icon name="CheckCircleIcon" size={16} className="text-[#135ef2] flex-shrink-0 mt-0.5" />
+                      <span className="text-xs text-[#0f172a]">Nouveau test disponible</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Trust Bar — Below the split layout */}
+        <div className="mt-16 pt-12 border-t border-[#e5e7eb]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <TrustStat value="500+" label="Étudiants actifs" />
+            <TrustStat value="4.8/5" label="Satisfaction clients" />
+            <TrustStat value="24/7" label="Accès illimité" />
+            <TrustStat value="100%" label="Paiements sécurisés" />
           </div>
         </div>
       </div>
-
-      <style jsx global>{`
-        .container-loader {
-          --size: 250px;
-          width: var(--size);
-          height: var(--size);
-          position: relative;
-        }
-
-        .ball {
-          position: absolute;
-          width: calc(var(--size) + var(--i));
-          height: calc(var(--size) + var(--i));
-          background-color: var(--color);
-          border-radius: 50%;
-          animation: move linear infinite;
-          transform-origin: center;
-          mix-blend-mode: hard-light;
-          animation-duration: var(--d);
-          filter: blur(45px); /* Adjusted for better visibility */
-          opacity: 0.9;
-          left: 50%;
-          top: 50%;
-          margin-left: calc((var(--size) + var(--i)) / -2);
-          margin-top: calc((var(--size) + var(--i)) / -2);
-        }
-
-        .ball:nth-child(even) {
-          animation-direction: reverse;
-        }
-
-        @keyframes move {
-          0% { transform: rotate(0deg) translate(30px) rotate(0deg); }
-          100% { transform: rotate(360deg) translate(30px) rotate(-360deg); }
-        }
-      `}</style>
     </section>
   );
 };
 
-function TrustItem({ icon, value, label }: { icon: string; value: string; label: string }) {
+function TrustStat({ value, label }: { value: string; label: string }) {
   return (
-    <div className="flex items-center gap-2 text-muted-foreground">
-      <Icon name={icon as any} size={18} className="text-[#c4a574]" />
-      <span className="text-sm">
-        <strong className="text-foreground font-semibold">{value}</strong>{' '}
-        <span className="text-muted-foreground">{label}</span>
-      </span>
+    <div className="text-center">
+      <p className="text-2xl sm:text-3xl font-bold text-[#0f172a] mb-1">{value}</p>
+      <p className="text-sm text-[#64748b]">{label}</p>
     </div>
   );
 }

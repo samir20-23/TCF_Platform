@@ -6,29 +6,29 @@
 
 @layer base {
   :root {
-    /* Primary — Original Brand Blue */
+    /* Primary — Vibrant Blue (EdTech) */
     --color-primary: #135ef2;
     --color-primary-foreground: #ffffff;
 
-    /* Secondary — Dark Academic Blue */
-    --color-secondary: #2c5282;
+    /* Secondary — Dark Slate for CTA Banner */
+    --color-secondary: #0f172a;
     --color-secondary-foreground: #ffffff;
 
-    /* Accent — Gold/Tan for subtle highlights */
-    --color-accent: #c4a574;
+    /* Accent — Subtle accent color */
+    --color-accent: #135ef2;
     --color-accent-foreground: #ffffff;
 
-    /* Background surfaces */
-    --color-background: #f8fafc;
+    /* Background surfaces — Cool light gray/blue */
+    --color-background: #f4f7f9;
     --color-foreground: #0f172a;
 
-    /* Cards */
+    /* Cards — Pure white */
     --color-card: #ffffff;
-    --color-card-foreground: #334155;
+    --color-card-foreground: #64748b;
 
     /* Popovers */
     --color-popover: #ffffff;
-    --color-popover-foreground: #334155;
+    --color-popover-foreground: #64748b;
 
     /* Muted / subtle */
     --color-muted: #f1f5f9;
@@ -47,8 +47,8 @@
     --color-error-foreground: #ffffff;
 
     /* Borders, inputs, focus rings */
-    --color-border: #e2e8f0;
-    --color-input: #e2e8f0;
+    --color-border: #e5e7eb;
+    --color-input: #e5e7eb;
     --color-ring: #135ef2;
   }
 
@@ -78,7 +78,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   h1,
@@ -88,7 +88,8 @@
   h5,
   h6,
   .font-heading {
-    font-family: 'Crimson Text', Georgia, serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 700;
   }
 
   .font-caption {

@@ -41,48 +41,46 @@ const PricingCard = ({
 
   return (
     <div
-      className={`relative flex flex-col rounded-lg border-2 bg-card p-8 shadow-academic transition-academic ${actualRecommended
-        ? 'border-primary shadow-academic-lg'
-        : 'border-border hover:border-primary/50'
-        } ${isHovered ? '-translate-y-1 shadow-academic-xl' : ''}`}
+      className={`relative flex flex-col rounded-2xl border bg-white p-8 shadow-sm transition-all duration-300 ${actualRecommended
+        ? 'border-[#135ef2] shadow-md scale-105 lg:scale-110'
+        : 'border-[#e5e7eb] hover:shadow-md'
+        } ${isHovered && actualRecommended ? 'shadow-lg' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {isPopular && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-          <span className="inline-flex items-center space-x-1 rounded-full bg-accent px-4 py-1 font-caption text-xs font-medium text-accent-foreground shadow-academic">
+          <span className="inline-flex items-center gap-2 rounded-full bg-[#135ef2] px-4 py-1 text-xs font-semibold text-white shadow-md">
             <Icon name="SparklesIcon" size={14} />
-            <span>Plus populairexx</span>
+            <span>Plus populaire</span>
           </span>
         </div>
       )}
 
       <div className="mb-6">
-        <h3 className="mb-2 font-heading text-2xl font-bold text-foreground">
+        <h3 className="mb-2 text-2xl font-bold text-[#0f172a]">
           {planName}
         </h3>
-        {/* We don't show description here as it's now features */}
       </div>
 
-      <div className="mb-6">
-        <div className="flex items-baseline">
-          <span className="font-heading text-5xl font-bold text-primary">
-            {(displayPrice || 0).toFixed(2)}
+      <div className="mb-8">
+        <div className="flex items-baseline gap-2">
+          <span className="text-5xl font-bold text-[#135ef2]">
+            {(displayPrice || 0).toFixed(0)}
           </span>
-
-          <span className="ml-2 font-caption text-lg text-muted-foreground">
+          <span className="text-lg text-[#64748b]">
             {currency}
           </span>
         </div>
-        <p className="mt-1 text-sm text-muted-foreground">{billingPeriod}</p>
+        <p className="mt-2 text-sm text-[#64748b]">{billingPeriod}</p>
       </div>
 
       <button
         onClick={handlePurchase}
         disabled={isProcessing}
-        className={`mb-6 flex w-full items-center justify-center space-x-2 rounded-md px-6 py-3 font-caption text-sm font-medium shadow-academic transition-academic hover:-translate-y-0.5 hover:shadow-academic-md disabled:cursor-not-allowed disabled:opacity-50 ${actualRecommended
-          ? 'bg-primary text-primary-foreground'
-          : 'bg-[#135ef2] text-secondary-foreground'
+        className={`mb-8 flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3.5 font-semibold text-sm transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${actualRecommended
+          ? 'bg-[#135ef2] text-white hover:bg-[#1150cc] shadow-md hover:shadow-lg'
+          : 'border border-[#e5e7eb] text-[#0f172a] hover:bg-[#f4f7f9]'
           }`}
       >
         {isProcessing ? (
@@ -100,13 +98,13 @@ const PricingCard = ({
 
       <div className="flex-1 space-y-3">
         {features.map((feature, index) => (
-          <div key={index} className="flex items-start space-x-3">
+          <div key={index} className="flex items-start gap-3">
             <Icon
               name="CheckCircleIcon"
               size={20}
-              className="text-success"
+              className="text-[#16a34a] flex-shrink-0 mt-0.5"
             />
-            <span className="font-caption text-sm text-foreground">
+            <span className="text-sm text-[#0f172a]">
               {feature}
             </span>
           </div>

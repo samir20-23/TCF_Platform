@@ -25,10 +25,10 @@ const footerLinks = {
 
 export default function SiteFooter() {
     return (
-        <footer className="bg-foreground text-white" aria-labelledby="footer-heading">
+        <footer className="bg-white text-foreground" aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">Pied de page</h2>
 
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border-t border-[#e5e7eb]">
                 {/* Main footer content */}
                 <div className="grid grid-cols-1 gap-10 py-12 sm:py-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
 
@@ -38,11 +38,11 @@ export default function SiteFooter() {
                             <div className="flex h-9 w-9 items-center justify-center rounded-lg text-white font-bold text-sm">
                                 <img src="/logo2.png" alt="TCF Canada" />
                             </div>
-                            <span className="text-lg font-bold">
-                                TCF <span className="text-primary-300">Canada</span>
+                            <span className="text-lg font-bold text-[#0f172a]">
+                                TCF <span className="text-[#135ef2]">Canada</span>
                             </span>
                         </Link>
-                        <p className="text-sm text-white/60 leading-relaxed max-w-xs mb-6">
+                        <p className="text-sm text-[#64748b] leading-relaxed max-w-xs mb-6">
                             Plateforme de préparation au TCF Canada. Simulations chronométrées, corrections professionnelles et suivi personnalisé.
                         </p>
                         {/* Social links */}
@@ -62,11 +62,11 @@ export default function SiteFooter() {
 
                     {/* Plateforme column */}
                     <div>
-                        <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Plateforme</h3>
+                        <h3 className="text-sm font-semibold text-[#0f172a] uppercase tracking-wider mb-4">Plateforme</h3>
                         <ul className="space-y-3">
                             {footerLinks.plateforme.map((link) => (
                                 <li key={link.href}>
-                                    <Link href={link.href} className="text-sm text-white/60 hover:text-white transition-colors duration-200">
+                                    <Link href={link.href} className="text-sm text-[#64748b] hover:text-[#0f172a] transition-colors duration-200">
                                         {link.label}
                                     </Link>
                                 </li>
@@ -76,11 +76,11 @@ export default function SiteFooter() {
 
                     {/* Ressources column */}
                     <div>
-                        <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Épreuves TCF</h3>
+                        <h3 className="text-sm font-semibold text-[#0f172a] uppercase tracking-wider mb-4">Épreuves TCF</h3>
                         <ul className="space-y-3">
                             {footerLinks.ressources.map((link) => (
                                 <li key={link.href}>
-                                    <Link href={link.href} className="text-sm text-white/60 hover:text-white transition-colors duration-200">
+                                    <Link href={link.href} className="text-sm text-[#64748b] hover:text-[#0f172a] transition-colors duration-200">
                                         {link.label}
                                     </Link>
                                 </li>
@@ -90,23 +90,23 @@ export default function SiteFooter() {
 
                     {/* CTA column */}
                     <div>
-                        <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Commencer</h3>
-                        <p className="text-sm text-white/60 mb-4">
+                        <h3 className="text-sm font-semibold text-[#0f172a] uppercase tracking-wider mb-4">Commencer</h3>
+                        <p className="text-sm text-[#64748b] mb-4">
                             Inscrivez-vous et accédez à vos tests immédiatement.
                         </p>
                         <Link
                             href="/user-registration"
-                            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-600 transition-colors duration-200 w-full sm:w-auto"
+                            className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#135ef2] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#1150cc] transition-colors duration-200 w-full sm:w-auto"
                         >
                             Créer un compte
                             <Icon name="ArrowRightIcon" size={16} />
                         </Link>
                         <div className="mt-6">
-                            <h4 className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-3">Légal</h4>
+                            <h4 className="text-xs font-semibold text-[#64748b] uppercase tracking-wider mb-3">Légal</h4>
                             <ul className="space-y-2">
                                 {footerLinks.legal.map((link) => (
                                     <li key={link.href}>
-                                        <Link href={link.href} className="text-xs text-white/40 hover:text-white/70 transition-colors duration-200">
+                                        <Link href={link.href} className="text-xs text-[#64748b] hover:text-[#0f172a] transition-colors duration-200">
                                             {link.label}
                                         </Link>
                                     </li>
@@ -117,13 +117,13 @@ export default function SiteFooter() {
                 </div>
 
                 {/* Bottom bar */}
-                <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p className="text-xs text-white/40">
+                <div className="border-t border-[#e5e7eb] py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p className="text-xs text-[#64748b]">
                         &copy; {new Date().getFullYear()} TCF Canada. Tous droits réservés.
                     </p>
                     <div className="flex items-center gap-4">
-                        <span className="text-xs text-white/30">Paiement sécurisé par Stripe</span>
-                        <Icon name="ShieldCheckIcon" size={16} className="text-white/30" />
+                        <span className="text-xs text-[#64748b]">Paiement sécurisé par Stripe</span>
+                        <Icon name="ShieldCheckIcon" size={16} className="text-[#135ef2]" />
                     </div>
                 </div>
             </div>

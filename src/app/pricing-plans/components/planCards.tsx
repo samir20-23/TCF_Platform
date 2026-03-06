@@ -152,19 +152,19 @@ const PlanCards = () => {
 
   return (
     <>
-      <section className="bg-gradient-to-b from-primary/5 to-background py-16 " >
+      <section className="bg-[#f4f7f9] py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h1 className="mb-4 font-heading text-4xl font-bold text-foreground md:text-5xl">
+          <div className="mb-16 text-center">
+            <h1 className="mb-4 text-4xl sm:text-5xl font-bold text-[#0f172a]">
               Choisissez votre plan de préparation
             </h1>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+            <p className="mx-auto max-w-2xl text-lg text-[#64748b]">
               Investissez dans votre réussite au TCF Canada avec nos plans adaptés à tous les besoins et budgets
             </p>
           </div>
 
           {/* Pricing Cards Grid */}
-          <div className="mb-16 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:gap-8 justify-items-center flex-wrap" >
+          <div className="mb-16 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:gap-8 justify-items-center" >
             {plans.map((plan, i) => (
               <div
                 key={plan.id}
